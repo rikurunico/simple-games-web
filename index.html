@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="summary">
+            <h1 class="title">Match Result</h1>
+            <h1 id="inGame"></h1>
+            <h1 id="result"></h1>
+        </div>
+        <div class="games">
+            <div class="pilihan" onclick="ambilPilihan('✌')">✌</div>
+            <div class="pilihan" onclick="ambilPilihan('✊')">✊</div>
+            <div class="pilihan" onclick="ambilPilihan('🖐️')">🖐️</div>
+    </div>
+
+    <script>
+        class Start {
+            constructor() {
+                this.namaKomputer = "Bot"
+                this.namaPlayer = "Human"
+                this.pilihanPlayer;
+                this.pemenang = ""
+                this.pilihanKomputer;
+            }
+
+            get getPilihanPlayer() {
+                return this.pilihanPlayer;
+            }
+            
+            set setPilihanPlayer(pilihan) {
+                this.pilihanPlayer = pilihan
+            }
+
+            get getPilihanKomputer() {
+                return this.pilihanKomputer;
+            }
+
+            set setPilihanKomputer(pilihan) {
+                this.pilihanKomputer = pilihan
+            }
+
+            BotBrain() {
+                const pilihanBot = ["✌", "✊", "🖐️"];
+                const botRandom = pilihanBot[Math.floor(Math.random() * pilihanBot.length)];
+                return botRandom;
+            }
+
+            LogicMain() {
+                if(this.pilihanPlayer == "✌" && this.pilihanKomputer == "✊") {
+                    return this.pemenang = this.namaKomputer;
+                } else if(this.pilihanPlayer == "✌" && this.pilihanKomputer == "🖐️") {
+                    return this.pemenang = this.namaPlayer;
+                } else if(this.pilihanPlayer == "✊" && this.pilihanKomputer == "✌") {
+                    return this.pemenang = this.namaPlayer;
+                } else if(this.pilihanPlayer == "✊" && this.pilihanKomputer == "🖐️") {
+                    return this.pemenang = this.namaKomputer;
+                } else if(this.pilihanPlayer == "🖐️" && this.pilihanKomputer == "✌") {
+                    return this.pemenang = this.namaKomputer;
+                } else if(this.pilihanPlayer == "🖐️" && this.pilihanKomputer == "✊") {
+                    return this.pemenang = this.namaPlayer;
+                } else {
+                    return this.pemenang = "Draw";
+                }
+            }
+
+            hasil() {
+                if(this.pemenang != "Draw") {
+                    return `Selamat ${this.pemenang} Menang`
+            } else {
+                return `${this.pemenang}, Better Luck Next Time Boi`
+            }
+        }
+    }
+    
+
+        
+
+        function ambilPilihan(param){
+            const start = new Start()
+            start.setPilihanPlayer = param;
+            start.setPilihanKomputer = start.BotBrain();
+            start.LogicMain();
+            console.log(start.pilihanKomputer);
+            console.log(start.pilihanPlayer);
+            console.log(start.hasil());
+
+            const inGame = document.getElementById("inGame");
+            const result = document.getElementById("result");
+            
+            inGame.textContent = `${start.pilihanPlayer} VS ${start.pilihanKomputer}`;
+            result.textContent = start.hasil();
+        }
+    </script>
+</body>
+</html>
