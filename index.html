@@ -11,8 +11,9 @@
     <div id="app">
         <div class="summary">
             <h1 class="title">Match Result</h1>
+            <br>
             <h1 id="inGame"></h1>
-            <h1 id="result"></h1>
+            <h2 id="result"></h2>
         </div>
         <div class="games">
             <div class="pilihan" onclick="ambilPilihan('✌')">✌</div>
@@ -94,8 +95,15 @@
             const inGame = document.getElementById("inGame");
             const result = document.getElementById("result");
             
-            inGame.textContent = `${start.pilihanPlayer} VS ${start.pilihanKomputer}`;
-            result.textContent = start.hasil();
+            inGame.textContent = "..."
+            result.textContent = "..."
+
+            setTimeout(() => {
+                inGame.textContent = `${start.getPilihanPlayer} VS ${start.getPilihanKomputer}`
+                result.textContent = start.hasil();
+            }, 1500);
+
+
         }
     </script>
 </body>
